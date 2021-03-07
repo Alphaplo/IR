@@ -55,8 +55,8 @@ class NYU_BasicAugmentRGBSequence(Sequence):
         self.shape_depth = shape_depth
         self.maxDepth = 255
 
-        self.rgbdir = 'E:\\UE_4.16\\Engine\\Binaries\\Win64\\TrainImages_L\\'
-        self.depthdir = 'E:\\UE_4.16\\Engine\\Binaries\\Win64\\DepthGT\\'
+        self.rgbdir = '../TrainImages/RGB/'
+        self.depthdir = '../TrainImages/Depth/'
         self.eptlist=[]
         for img_name in os.listdir(self.rgbdir):
             if os.path.splitext(img_name)[1] == '.png':
@@ -132,8 +132,8 @@ class NYU_BasicRGBSequence(Sequence):
         self.shape_depth = shape_depth
         self.maxDepth = 255
 
-        self.rgbdir = 'F:\\ZHD\\TN10\\mytrain\\TestImages\\synthetic\\'
-        self.depthdir = 'E:\\UE_4.16\\Engine\\Binaries\\Win64\\TestGT\\'
+        self.rgbdir = '../TestImages/synthetic/RGB/'
+        self.depthdir = '../TestImages/synthetic/DepthGT/'
         self.eptlist=[]
         for img_name in os.listdir(self.rgbdir):
             if os.path.splitext(img_name)[1] == '.png':

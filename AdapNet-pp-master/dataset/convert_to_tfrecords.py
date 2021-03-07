@@ -23,8 +23,8 @@ def _bytes_feature(data):
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=[data]))
 
 PARSER = argparse.ArgumentParser()
-PARSER.add_argument('-f', '--file', default = '../config/test.txt')
-PARSER.add_argument('-r', '--record', default = '../config/test_forest.record')
+PARSER.add_argument('-f', '--file', default = '../config/test_synthetic.txt')
+PARSER.add_argument('-r', '--record', default = '../config/test_synthetic.record')
 PARSER.add_argument('-m', '--mean', default = 0)
 
 def decode(txt):
@@ -46,6 +46,7 @@ def convert(f, record_name, mean_flag):
         mean = np.zeros(cv2.imread(f[0][0]).shape, np.float32)
 
     for name in f:
+        print(name[0])
         modality = cv2.imread(name[0])
         modality = cv2.resize(modality, (640, 480), interpolation=cv2.INTER_CUBIC)
         if mean_flag:

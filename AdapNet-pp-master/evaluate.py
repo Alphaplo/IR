@@ -16,11 +16,13 @@ import argparse
 import datetime
 import importlib
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import cv2
 import numpy as np
 import tensorflow as tf
 import yaml
 from dataset.helper import *
+os.sys.path.append('models')
 
 PARSER = argparse.ArgumentParser()
 PARSER.add_argument('-c', '--config', default='config/forest_test.config')
@@ -45,8 +47,8 @@ def test_func(config, directory):
     import_variables = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
     print('total_variables_loaded:', len(import_variables))
     saver = tf.train.Saver(import_variables)
-    #saver = tf.train.import_meta_graph(config['checkpoint']+'.meta')
-    saver.restore(sess, config['checkpoint'])
+    #saver = tf.train.import_meta_graph(os.path.join(os.getcwd(),config['checkpoint'])+'.meta')
+    saver.restore(sess,config['checkpoint'])
     sess.run(iterator.initializer)
     step = 0
     total_num = 0
@@ -78,7 +80,7 @@ def test_func(config, directory):
                         newImg[h, w] = map[prediction[b, h, w]]
                 newImg = cv2.cvtColor(newImg, cv2.COLOR_BGR2RGB)
                 cv2.imshow(str(b + 1), newImg)
-                cv2.imwrite(directory + str(b + 21) + '.png', newImg)
+                #cv2.imwrite(directory + str(b + 21) + '.png', newImg)
                 cv2.waitKey(0)
 
             output_matrix = compute_output_matrix(gt, prediction, output_matrix)

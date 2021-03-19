@@ -13,7 +13,6 @@
  GNU General Public License for more details.'''
 
 import tensorflow as tf
-import sys
 import network_base
 
 class AdapNet_pp(network_base.Network):
